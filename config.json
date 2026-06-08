@@ -1,0 +1,4 @@
+{
+    "file_path": "app.log",
+    "log_levels": ["ERROR", "WARNING"]
+}
