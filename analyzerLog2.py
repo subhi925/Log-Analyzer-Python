@@ -1,7 +1,17 @@
 import re
 import json
+from datetime import datetime
 #================================================================
 def load_config(config_path):
+    """
+    To load from the JSON file
+    details about your log app
+    Args:
+        config_path: your file name .JSON
+
+    Returns:
+        A Dictionary list contains level logs and file log path
+    """
     my_dict = {}
     
     try:
@@ -30,13 +40,39 @@ def count_in_lst(lst,logType):
         if re.search(logType, item):
             cnt += 1
     return cnt
-#=================================================================================       
-print("LOG Anylaizer Please choose From Menu:")
-print(f"Click 1 To Creat A Report File.\nClick 2 To Ener User to show logs")
-config = load_config("config.json")
-choose = input("enter your chooice: ")
+#=================================================================================
+def user_Report_byTime(lst,time,user):
+    final_lst = []
+    for item in lst:
+        if re.search(f"User '{user}'",item):
+            try:
+                log_time = re.search(r"\d{2}:\d{2}:\d{2}", item)
+                if log_time ==None:
+                    final_lst.append(item)
+                else:
+                    log_time = log_time.group()
+                    log_time = datetime.strptime(log_time, "%H:%M:%S")
+                    if log_time >= time:
+                        final_lst.append(item)
+            except Exception as err:
+                 print("The Error is:", type(err).__name__)
+    return final_lst                  
+                
+#==================================Menue================================================
+def main ():
+    print("LOG Anylaizer Please choose From Menu:")
+    print(f"Click 1 To Creat A Report File.\nClick 2 To Ener User to show logs\
+            \nClick 3 to input User and Time to check log after it in new File.")
+    choose = input("enter your chooice: ")
+    return choose
+    
 
-while choose != '1' and choose != '2' :
+#===============================================================================
+
+choose = main()
+config = load_config("config.json")
+
+while choose != '1' and choose != '2' and choose != '3' :
     choose = input("Enter a legal chooice: ")
 
 user_found = False
@@ -60,6 +96,30 @@ elif choose == '2' :
             user_found = True
     if user_found == False :
         print("check the user name we did not found")
+elif choose == '3':
+    search_name = input("Enter user name to Search: ")
+    time_after = input("Enter The time format hh:mm:ss: ")
+    while True:        
+        try:
+            given_time = datetime.strptime(time_after, "%H:%M:%S")
+            break
+        except Exception as err:
+            time_after = input("Enter A Legal time format or Legal Time hh:mm:ss: ")
+    user_lst = user_Report_byTime(my_lst,given_time,search_name)
+    if len(user_lst) > 0:
+        repo_dict = {}
+        for item in config["log_levels"]:
+           repo_dict[item] = count_in_lst(user_lst, item) 
+        with open (f"{search_name}_report.txt", 'w') as f_report:
+            f_report.write(f"==========Log Analyzer for '{search_name}'=======\n")
+            for level , cnt in repo_dict.items():
+                f_report.write(f"Total {level}s: {cnt}\n")
+            f_report.write(f"==================LOGS===================\n")
+            for item in user_lst:
+                f_report.write(f"'{item}'\n")
+        print("your file is Ready")
+    else:
+        print("make sure of user name")
 print("all Done")
     
     
