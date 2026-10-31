@@ -1,11 +1,11 @@
-# 📊 Python Log Analyzer – From Simple to Production-Ready
+# 📊 Python Log Analyzer (Academic Project)
 
 A Python tool for reading and analyzing application log files. This project shows how to grow from a simple script to a real-world production tool.
 
 ## 🎯 What This Project Is About
 
 Logs are everywhere in software. When something goes wrong, you need to **read logs** to find the problem. This tool helps you:
-- 🔍 Search through thousands of log lines
+- 🔍 Search through log files
 - 📊 Count errors and warnings
 - 📈 Filter logs by time and user
 - 📝 Generate reports
@@ -28,16 +28,16 @@ This is a straightforward script that:
 python analyzerLog.py
 ```
 
-### Version 2.0 (The Professional One)
+### Version 2.0 (Improved version)
 **File:** `analyzerLog2.py`
 
-This is more advanced:
+This version adds:
 - Uses a config file instead of hardcoding values
 - Can filter by specific times
 - Generates nice reports
 - Better error handling
 
-**Good for:** Real-world use
+**Good for:** Practicing a more flexible design
 
 ```bash
 python analyzerLog2.py
@@ -82,7 +82,7 @@ python analyzerLog2.py
 ```
 Log-Analyzer-Python/
 ├── analyzerLog.py      # Simple version (good for learning)
-├── analyzerLog2.py     # Advanced version (production-ready)
+├── analyzerLog2.py     # Improved version
 ├── generate_logs.py    # Creates sample log file
 ├── config.json         # Configuration for v2.0
 ├── app.log            # Sample log file
@@ -116,7 +116,7 @@ Log-Analyzer-Python/
 ✅ Writing code that other people can use and configure  
 ✅ Generating reports and outputs  
 
-## 📖 Real-World Example
+## 📖 Example
 
 ### Imagine This Scenario:
 You're at work and your application crashed. You need to:
@@ -176,7 +176,7 @@ if parse_time(log_time) > user_time:
 | Config file | ❌ | ✅ |
 | Time filtering | ❌ | ✅ |
 | Report generation | ✅ | ✅ |
-| Error handling | Basic | Robust |
+| Error handling | Basic | More checks |
 | Code structure | Procedural | Better organized |
 
 ## 🎯 Learning Goals
@@ -184,7 +184,7 @@ if parse_time(log_time) > user_time:
 This project shows:
 1. **How to start simple** – Get it working first
 2. **How to improve** – Refactor for flexibility
-3. **How to scale** – Make it production-ready
+3. **How to improve a script** – Make it more flexible and reusable
 4. **How to communicate** – Clear, helpful output
 
 ## 🤔 What's Next?
@@ -199,7 +199,7 @@ If I continued this project, I'd add:
 ## 🎨 Things I'm Proud Of
 
 1. **Showing Progress** – Two versions show growth
-2. **Real-World Focus** – Actually useful for troubleshooting
+2. **Troubleshooting focus** – Practice for the kind of log reading I do in support work
 3. **Clean Code** – Easy to understand and modify
 4. **Good Documentation** – Anyone can use this
 5. **Practical Learning** – Reinforces important concepts
